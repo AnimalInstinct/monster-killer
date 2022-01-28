@@ -1,0 +1,36 @@
+Arguments: 
+  /home/alex/.nvm/versions/node/v14.18.3/bin/node /home/alex/.node/corepack/yarn/1.22.15/bin/yarn.js init
+
+PATH: 
+  ~/.composer/vendor/bin:/home/alex/.rbenv/plugins/ruby-build/bin:/home/alex/.rbenv/shims:/home/alex/.rbenv/bin:/home/alex/.rbenv/shims:/home/alex/.nvm/versions/node/v14.18.3/bin:/home/alex/.rbenv/plugins/ruby-build/bin:/home/alex/.rbenv/shims:/home/alex/.rbenv/bin:/home/alex/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/alex/.rvm/bin:/usr/local/bin/
+
+Yarn version: 
+  1.22.15
+
+Node version: 
+  14.18.3
+
+Platform: 
+  linux x64
+
+Trace: 
+  Error: canceled
+      at Interface.<anonymous> (/home/alex/.node/corepack/yarn/1.22.15/lib/cli.js:137145:13)
+      at Interface.emit (events.js:400:28)
+      at Interface._ttyWrite (readline.js:1001:16)
+      at ReadStream.onkeypress (readline.js:265:10)
+      at ReadStream.emit (events.js:400:28)
+      at emitKeys (internal/readline/utils.js:358:14)
+      at emitKeys.next (<anonymous>)
+      at ReadStream.onData (readline.js:1270:36)
+      at ReadStream.emit (events.js:400:28)
+      at addChunk (internal/streams/readable.js:293:12)
+
+npm manifest: 
+  No manifest
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile

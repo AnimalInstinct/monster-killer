@@ -1,0 +1,9 @@
+{
+  "name": "monster-killer",
+  "version": "1.0.0",
+  "main": "scripts/app.js",
+  "license": "MIT",
+  "devDependencies": {
+    "eslint": "^8.7.0"
+  }
+}
