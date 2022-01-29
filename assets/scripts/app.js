@@ -36,21 +36,30 @@ function resetGame(value) {
     monsterHealthBar.value = value;
 }
 
-function removeBonusLife() {
-    bonusLifeEl.parentNode.removeChild(bonusLifeEl);
-}
-
 function setPlayerHealth(health) {
     playerHealthBar.value = health;
 }
 
-const ATTACK_VALUE = 5;
-const MONSTER_ATTACK_VALUE = 50;
+const ATTACK_VALUE = 10;
+const MONSTER_ATTACK_VALUE = 30;
 const STRONG_ATTACK_VALUE = 30;
-const HEAL_VALUE = 10;
-const BONUS_LIVES = 3;
+const HEAL_VALUE = 30;
+const BONUS_LIVES = 2;
 
-let chosenMaxLife = 100;
+const MODE_ATTACK = "ATTACK";
+const MODE_STRONG_ATTACK = "STRONG_ATTACK";
+
+const enteredValue = parseInt(
+    prompt("Maximum life for you and the monster", "100")
+);
+
+let chosenMaxLife = parseInt(enteredValue);
+
+if (isNaN(enteredValue) || chosenMaxLife <= 0) {
+    chosenMaxLife = 100;
+    alert("Wrong max life value entered. Max life will be 100 by default.");
+}
+
 let currentMonsterHealth = chosenMaxLife;
 let currentPlayerHealth = chosenMaxLife;
 let maxDamage;
@@ -58,15 +67,20 @@ let bonusLives = BONUS_LIVES;
 
 bonusLifeEl.innerText = bonusLives;
 
-
 adjustHealthBars(chosenMaxLife);
+
+function reset() {
+    currentMonsterHealth = chosenMaxLife;
+    currentPlayerHealth = chosenMaxLife;
+    bonusLifeEl.innerText = BONUS_LIVES;
+    resetGame(chosenMaxLife);
+}
 
 function endRound() {
     const playerDamage = dealPlayerDamage(MONSTER_ATTACK_VALUE);
     currentPlayerHealth -= playerDamage;
 
-
-    if (currentPlayerHealth <=0 && bonusLives > 0) {
+    if (currentPlayerHealth <= 0 && bonusLives > 0) {
         bonusLives -= 1;
         bonusLifeEl.innerText = bonusLives;
         currentPlayerHealth = chosenMaxLife;
@@ -76,18 +90,20 @@ function endRound() {
 
     if (currentMonsterHealth <= 0 && currentPlayerHealth > 0) {
         alert("Monster is dead");
+        reset();
     } else if (currentPlayerHealth <= 0 && currentMonsterHealth > 0) {
         alert("You are dead");
-    } else if(currentMonsterHealth <= 0 && currentPlayerHealth <= 0) {
+        reset();
+    } else if (currentMonsterHealth <= 0 && currentPlayerHealth <= 0) {
         alert("Draw");
+        reset();
     }
 }
 
 function attackMonster(mode) {
-
-    if (mode === "ATTACK") {
+    if (mode === MODE_ATTACK) {
         maxDamage = ATTACK_VALUE;
-    } else {
+    } else if (mode === MODE_STRONG_ATTACK) {
         maxDamage = STRONG_ATTACK_VALUE;
     }
 
@@ -98,12 +114,11 @@ function attackMonster(mode) {
 }
 
 function attackHandler() {
-    attackMonster("ATTACK");
+    attackMonster(MODE_ATTACK);
 }
 
 function strongAttackHandler() {
-    attackMonster("STRONG_ATTACK");
-
+    attackMonster(MODE_STRONG_ATTACK);
 }
 
 function healPlayerHandler() {
@@ -121,8 +136,6 @@ function healPlayerHandler() {
     endRound();
 }
 
-
 attackBtn.addEventListener("click", attackHandler);
 strongAttackBtn.addEventListener("click", strongAttackHandler);
 healBtn.addEventListener("click", healPlayerHandler);
-
